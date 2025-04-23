@@ -1,11 +1,11 @@
 import './styles/index.css'
-import {BoardColumn} from "../widgets/board-column";
 import {useDragState} from "@features/drag-card/model/useDrag.ts";
 import {useBoards} from "@features/boards-management/model/useBoards.ts";
 import {AppRouter} from "@app/providers/router/ui/AppRouter.tsx";
+import {BoardColumn} from "@entities/Boards";
 
 function Index() {
-
+    // const boards = useSelector(getBoards)
     const {boards,setBoards} = useBoards()
     const {currentItem,currentBoard,onDragEnd,onDragStart} = useDragState()
     return (

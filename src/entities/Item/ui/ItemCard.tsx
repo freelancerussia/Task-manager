@@ -1,6 +1,6 @@
 import {DragEvent, FC} from "react";
 import {Item} from "@entities/Item";
-import {Board} from "@entities/Board";
+import {Board} from "entities/Boards";
 
 interface ItemCardProps {
     item: Item;

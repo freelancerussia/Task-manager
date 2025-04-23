@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Board } from "@entities/Board";
+import {Board} from "entities/Boards";
 
 interface UseBoardsResult {
     boards: Board[];

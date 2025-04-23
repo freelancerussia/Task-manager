@@ -1,5 +1,5 @@
 import {DragEvent, useCallback} from "react";
-import {Board} from "@entities/Board";
+import {Board} from "entities/Boards";
 import {Item} from "@entities/Item";
 
 interface DropHandlers {

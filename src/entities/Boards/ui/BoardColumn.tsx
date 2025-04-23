@@ -1,10 +1,10 @@
 import React, {DragEvent} from "react";
-import {Board} from "@entities/Board";
+import {Board} from "entities/Boards";
 import {useDropHandlers} from "@features/drag-card/model/useDrop.ts";
 import {BoardTitle} from "@shared/ui/BoardTitle/BoardTitle.tsx";
-import {ItemCard} from "./ui/ItemCard.tsx";
 import {Item} from "@entities/Item";
 import {useBoards} from "@features/boards-management/model/useBoards.ts";
+import {ItemCard} from "@entities/Item/ui/ItemCard.tsx";
 
 interface BoardColumnProps {
     board: Board;
@@ -24,7 +24,7 @@ export const BoardColumn: React.FC<BoardColumnProps> = ({
                                                             onDragEnd,
                                                             currentBoard,
                                                             currentItem,
-}) => {
+                                                        }) => {
     const { onDropItem, onDropBoard, onDragOver, onDragLeave } = useDropHandlers(boards, setBoards,currentBoard, currentItem);
     const {addItem} = useBoards()
 
