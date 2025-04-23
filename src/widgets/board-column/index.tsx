@@ -46,7 +46,7 @@ export const BoardColumn: React.FC<BoardColumnProps> = ({
                         item={item}
                         board={board}
                         onDragStart={onDragStart}
-                        onDragEnd={onDragEnd}
+                        onDragEnd={(e)=>onDragEnd(e)}
                     />
                 </div>
             ))}

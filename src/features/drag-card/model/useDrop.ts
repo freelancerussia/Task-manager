@@ -12,7 +12,6 @@ interface DropHandlers {
 export const useDropHandlers = (boards: Board[], setBoards: Dispatch<SetStateAction<Board[]>>,currentBoard: Board | null,
                                 currentItem: Item | null): DropHandlers => {
 
-    // const {currentBoard, currentItem} = useDragState();
 
     const onDragOver = (e: DragEvent<HTMLElement>) => {
         e.preventDefault();
@@ -28,8 +27,6 @@ export const useDropHandlers = (boards: Board[], setBoards: Dispatch<SetStateAct
     }, []);
 
     const onDropItem = useCallback((board: Board, item: Item) => {
-        // console.log('currentItem',currentItem)
-        // console.log('currentBoard',currentBoard)
         if (!currentItem || !currentBoard) return;
         if (currentBoard.id === board.id && currentItem.id === item.id) return;
 
