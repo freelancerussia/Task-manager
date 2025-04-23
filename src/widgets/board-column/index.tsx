@@ -1,14 +1,15 @@
-import React, {Dispatch, DragEvent, SetStateAction} from "react";
+import React, {DragEvent} from "react";
 import {Board} from "@entities/Board";
 import {useDropHandlers} from "@features/drag-card/model/useDrop.ts";
 import {BoardTitle} from "@shared/ui/BoardTitle/BoardTitle.tsx";
 import {ItemCard} from "./ui/ItemCard.tsx";
 import {Item} from "@entities/Item";
+import {useBoards} from "@features/boards-management/model/useBoards.ts";
 
 interface BoardColumnProps {
     board: Board;
     boards: Board[];
-    setBoards: Dispatch<SetStateAction<Board[]>>;
+    setBoards: (boards: Board[]) => void;
     onDragStart: (board: Board, item: Item) => void;
     onDragEnd: (e:DragEvent<HTMLDivElement>) => void;
     currentBoard: Board | null;
@@ -25,6 +26,7 @@ export const BoardColumn: React.FC<BoardColumnProps> = ({
                                                             currentItem,
 }) => {
     const { onDropItem, onDropBoard, onDragOver, onDragLeave } = useDropHandlers(boards, setBoards,currentBoard, currentItem);
+    const {addItem} = useBoards()
 
     return (
         <div
@@ -33,8 +35,8 @@ export const BoardColumn: React.FC<BoardColumnProps> = ({
             key={board.id}
             className="board"
         >
-            <BoardTitle title={board.title} />
-            {board.items.map((item) => (
+            <BoardTitle title={board.title} addItem={()=>addItem(board.id,'qwe')}/>
+            {board.items.length === 0 ? 'Задач нет' : board.items.map((item) => (
                 <div
                     onDragOver={onDragOver}
                     onDragLeave={onDragLeave}

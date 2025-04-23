@@ -7,7 +7,6 @@ export const useDragState = () => {
     const [currentBoard, setCurrentBoard] = useState<Board | null>(null);
     const [currentItem, setCurrentItem] = useState<Item | null>(null);
     const onDragStart = (board: Board, item: Item) => {
-        console.log("currentBoard",currentBoard)
         setCurrentBoard(board);
         setCurrentItem(item);
     };

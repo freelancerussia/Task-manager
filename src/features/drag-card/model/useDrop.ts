@@ -1,4 +1,4 @@
-import { DragEvent, Dispatch, SetStateAction, useCallback} from "react";
+import {DragEvent, useCallback} from "react";
 import {Board} from "@entities/Board";
 import {Item} from "@entities/Item";
 
@@ -9,7 +9,7 @@ interface DropHandlers {
     onDragLeave: (e: DragEvent<HTMLElement>) => void;
 }
 
-export const useDropHandlers = (boards: Board[], setBoards: Dispatch<SetStateAction<Board[]>>,currentBoard: Board | null,
+export const useDropHandlers = (boards: Board[], setBoards: (board: Board[]) => void, currentBoard: Board | null,
                                 currentItem: Item | null): DropHandlers => {
 
 
@@ -75,5 +75,5 @@ export const useDropHandlers = (boards: Board[], setBoards: Dispatch<SetStateAct
         setBoards(updatedBoards);
     }, [boards, currentBoard, currentItem, setBoards]);
 
-    return { onDropItem, onDropBoard, onDragOver, onDragLeave };
+    return {onDropItem, onDropBoard, onDragOver, onDragLeave};
 };

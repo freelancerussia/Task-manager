@@ -1,9 +1,10 @@
-import React from "react";
+import {FC} from "react";
 
 interface BoardTitleProps {
     title: string;
+    addItem: () => void;
 }
 
-export const BoardTitle: React.FC<BoardTitleProps> = ({ title }) => {
-    return  <div className="board__header"><div className="board__title">{title}</div> <button >+</button></div>
+export const BoardTitle: FC<BoardTitleProps> = ({ title,addItem }) => {
+    return  <div className="board__header"><div className="board__title">{title}</div> <button onClick={addItem} >+</button></div>
 };

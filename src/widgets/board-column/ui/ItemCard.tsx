@@ -1,4 +1,4 @@
-import React, {DragEvent} from "react";
+import {DragEvent, FC} from "react";
 import {Item} from "@entities/Item";
 import {Board} from "@entities/Board";
 
@@ -9,7 +9,7 @@ interface ItemCardProps {
     onDragEnd: (e:DragEvent<HTMLDivElement>) => void;
 }
 
-export const ItemCard: React.FC<ItemCardProps> = ({ item, board,onDragStart, onDragEnd }) => {
+export const ItemCard: FC<ItemCardProps> = ({ item, board,onDragStart, onDragEnd }) => {
 
     return (
         <div
