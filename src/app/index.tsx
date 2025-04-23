@@ -1,25 +1,32 @@
 import './styles/index.css'
-import {useDragState} from "@features/drag-card/model/useDrag.ts";
-import {useBoards} from "@features/boards-management/model/useBoards.ts";
 import {AppRouter} from "@app/providers/router/ui/AppRouter.tsx";
-import {BoardColumn} from "@entities/Boards";
+import {Board, BoardColumn, getBoards} from "@entities/Boards";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch} from "@app/providers/StoreProvider";
+import {Item} from "@entities/Item";
+import {dragStateActions} from "@features/drag-card/model/slice/dragStateSlice.ts";
 
 function Index() {
-    // const boards = useSelector(getBoards)
-    const {boards,setBoards} = useBoards()
-    const {currentItem,currentBoard,onDragEnd,onDragStart} = useDragState()
+    const boards = useSelector(getBoards)
+    // const {onDragEnd,onDragStart} = useDragState()
+    const dispatch = useDispatch<AppDispatch>();
+
+    const onDragStartHandler = (board: Board, item: Item) => {
+        dispatch(dragStateActions.setDragStart({ board, item }));
+    };
+
+    const onDragEndHandler = () => {
+        dispatch(dragStateActions.setDragEnd());
+    };
     return (
         <div className="app">
             {boards.map((board) => (
                 <BoardColumn
                     key={board.id}
                     board={board}
-                    boards={boards}
-                    setBoards={setBoards}
-                    onDragStart={onDragStart}
-                    onDragEnd={(e)=>onDragEnd(e)}
-                    currentBoard={currentBoard}
-                    currentItem={currentItem}
+                    onDragStart={onDragStartHandler}
+                    onDragEnd={onDragEndHandler}
+
                 />
             ))}
             <AppRouter/>

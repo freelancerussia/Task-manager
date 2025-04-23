@@ -1,33 +1,24 @@
 import React, {DragEvent} from "react";
 import {Board} from "entities/Boards";
-import {useDropHandlers} from "@features/drag-card/model/useDrop.ts";
+import {useDropHandlers} from "@features/drag-card/ui/useDrop.ts";
 import {BoardTitle} from "@shared/ui/BoardTitle/BoardTitle.tsx";
 import {Item} from "@entities/Item";
-import {useBoards} from "@features/boards-management/model/useBoards.ts";
 import {ItemCard} from "@entities/Item/ui/ItemCard.tsx";
+
 
 interface BoardColumnProps {
     board: Board;
-    boards: Board[];
-    setBoards: (boards: Board[]) => void;
     onDragStart: (board: Board, item: Item) => void;
     onDragEnd: (e:DragEvent<HTMLDivElement>) => void;
-    currentBoard: Board | null;
-    currentItem: Item | null;
 }
 
 export const BoardColumn: React.FC<BoardColumnProps> = ({
                                                             board,
-                                                            boards,
-                                                            setBoards ,
                                                             onDragStart,
                                                             onDragEnd,
-                                                            currentBoard,
-                                                            currentItem,
                                                         }) => {
-    const { onDropItem, onDropBoard, onDragOver, onDragLeave } = useDropHandlers(boards, setBoards,currentBoard, currentItem);
-    const {addItem} = useBoards()
-
+    const { onDropItem, onDropBoard, onDragOver, onDragLeave } = useDropHandlers();
+    // const dispatch = useDispatch<AppDispatch>();
     return (
         <div
             onDragOver={onDragOver}
@@ -35,7 +26,7 @@ export const BoardColumn: React.FC<BoardColumnProps> = ({
             key={board.id}
             className="board"
         >
-            <BoardTitle title={board.title} addItem={()=>addItem(board.id,'qwe')}/>
+            <BoardTitle title={board.title} addItem={()=>{}}/>
             {board.items.length === 0 ? 'Задач нет' : board.items.map((item) => (
                 <div
                     onDragOver={onDragOver}

@@ -35,7 +35,25 @@ export const boardsSlice = createSlice({
         },
         addItem(state: BoardsSchema, action: PayloadAction<string>) {
             return {...state, boards: [...state.boards,{id: state.boards.length +1, title:action.payload, items:[]} ]};
-        }
+        },
+        deleteItem: (state, action: PayloadAction<{ boardId: number; itemId: number }>) => {
+            const board = state.boards.find((b) => b.id === action.payload.boardId);
+            if (board) {
+                board.items = board.items.filter((item) => item.id !== action.payload.itemId);
+            }
+        },
+        moveItem: (state, action: PayloadAction<{ sourceBoardId: number; destinationBoardId: number; itemId: number; destinationItemIndex: number }>) => {
+            const sourceBoard = state.boards.find(b => b.id === action.payload.sourceBoardId);
+            const destinationBoard = state.boards.find(b => b.id === action.payload.destinationBoardId);
+
+            if (sourceBoard && destinationBoard) {
+                const itemIndex = sourceBoard.items.findIndex(i => i.id === action.payload.itemId);
+                if (itemIndex !== -1) {
+                    const [movedItem] = sourceBoard.items.splice(itemIndex, 1);
+                    destinationBoard.items.splice(action.payload.destinationItemIndex, 0, movedItem);
+                }
+            }
+        },
     },
 
 });
