@@ -1,6 +1,6 @@
 import s from './PageError.module.scss';
 import  classNames from "classnames";
-import Button from "@shared/ui/Button/Button.tsx";
+import {Button} from "@shared/ui/Button/Button.tsx";
 interface PageErrorProps  {
     className?: string
 }
